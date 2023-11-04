@@ -7,9 +7,8 @@ export const Root = (props) => {
     
     return (
         <>
-            <Header value ={props.selectTab} setValue = {props.setSelectTab}/>
+            <Header/>
             {/* Add an Outlet*/}
-            <Outlet />
         </>
     );
 };

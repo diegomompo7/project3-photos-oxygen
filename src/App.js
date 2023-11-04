@@ -3,16 +3,16 @@ import React from 'react';
 import './App.css';
 import { Root } from './components/Root/Root';
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
-import { myPhotos } from './components/myPhotos/myPhotos';
+import { MyPhotos } from './components/MyPhotos/MyPhotos';
 
 
 function App() {
 
-  const [selectTab, setSelectTab] = React.useState(0);
+
 
   const appRouter = createBrowserRouter(createRoutesFromElements(
-    <Route path='/' element={<Root selectTab={selectTab} setSelectTab={setSelectTab}/>}>
-      <Route path= "my-photos" element={<myPhotos />}></Route>
+    <Route path="/" element={<Root/>}>
+        <Route path= "my-photos" element={<MyPhotos />}></Route>
     </Route>
 
 ))

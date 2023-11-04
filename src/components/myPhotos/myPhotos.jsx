@@ -1,10 +1,11 @@
 import React from 'react';
+import './MyPhotos.css'
 
 // import Outlet
 
-export const myPhotos = () => {
+export const MyPhotos = () => {
     
     return (
-        <h1>Hola</h1>
+        <h1>a</h1>
     );
 };

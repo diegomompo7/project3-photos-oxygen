@@ -1,25 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Tabs, Tab} from "@mui/material";
-import { NavLink, Navigate } from "react-router-dom";
 import './Header.css'
 
-export const Header = (props) => {
+export const Header = () => {
+
+  const [selectTab, setSelectTab] = React.useState();
+
+  console.log(window.location.href);
+
+   useEffect(() => {
+
+    if(window.location.href.includes("/my-photos")){
+      setSelectTab(1)
+    }else{
+      setSelectTab(0)
+    }
+
+   }, [])
 
     const handleChange = (event, newValue) => {
       console.log(newValue)
-      props.setValue(newValue);
+      setSelectTab(newValue);
       console.log(event.target)
     };
+    
 
     return (
         <Box className="header">
-            <Tabs centered value={props.value} onChange={handleChange}
+            <Tabs centered value={selectTab} onChange={handleChange}
               sx={{
-                "& button": { color: "#FFFFFF54", width: "50%", paddingTop:"23px" },
+                "& a": { color: "#FFFFFF54", width: "50%", paddingTop:"23px" },
               }}
             >
-                <Tab label="HOME"></Tab>
-                <Tab label="MY PHOTOS"></Tab>
+                <Tab label="HOME" href="/"></Tab>
+                <Tab label="MY PHOTOS" href="/my-photos"></Tab>
             </Tabs>
         </Box> 
     )
