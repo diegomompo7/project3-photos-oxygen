@@ -1,11 +1,29 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Tabs, Tab } from "@mui/material";
 import './Header.css'
 
 export const Header = () => {
+
+
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+      console.log(newValue)
+      setValue(newValue);
+      console.log(event.target)
+    };
+
     return (
-        <div className="header">
-            <h1>d</h1>
-        </div> 
+        <Box className="header">
+            <Tabs centered value={value} onChange={handleChange}
+              sx={{
+                "& button": { color: "#FFFFFF54"  },
+              }}
+            >
+                <Tab label="HOME" ></Tab>
+                <Tab label="MY PHOTOS"></Tab>
+            </Tabs>
+        </Box> 
     )
 }
+
