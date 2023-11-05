@@ -3,9 +3,11 @@ import './MyPhotos.css'
 
 // import Outlet
 
-export const MyPhotos = () => {
+const MyPhotos = () => {
     
     return (
-        <h1>a</h1>
+       <h1>My Photos</h1>
     );
 };
+
+export default MyPhotos

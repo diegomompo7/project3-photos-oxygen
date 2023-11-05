@@ -1,0 +1,39 @@
+.search{
+    display: flex;
+    flex-direction: column;
+    width: 84.1%;
+    max-width: 25em;
+    margin: 0 auto;
+
+}
+.searchPhoto{
+    background-color: #0F47AF;
+    font-size: 1rem;
+    height: 2.5em;
+    margin-top: 1.25em;
+
+    padding: 0.875em;
+    margin-bottom: 2em;
+}
+.btnSearch{
+    width: 2.292em;
+    height: 2.292em;
+    left: 40%;
+}
+
+@media (min-width: 400px) {
+    .search {
+        flex-direction: row;
+    }
+    .btnSearch{
+        left:34px;
+        top: 2.2em;
+
+    }
+    .searchPhoto{
+        width: 24.593em;
+        margin-top: 3.625em;
+    }
+}
+
+

@@ -29,7 +29,7 @@ export const Header = () => {
         <Box className="header">
             <Tabs centered value={selectTab} onChange={handleChange}
               sx={{
-                "& a": { color: "#FFFFFF54", width: "50%", paddingTop:"23px" },
+                "& a": { color: "#FFFFFF54", width: "50%", paddingTop:"23px", fontSize: "1em", fontFamily: 'Oxanium'},
               }}
             >
                 <Tab label="HOME" href="/"></Tab>
