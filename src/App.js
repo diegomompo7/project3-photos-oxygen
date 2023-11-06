@@ -20,8 +20,8 @@ function App(props) {
 
   const appRouter = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<Root/>}>
-      <Route path="/" element={<Home searchP={searchP} setSearchP={setSearchP} />}></Route>
-      <Route path= "search" element={<Search searchP={searchP} setSearchP={setSearchP}/>}></Route>
+      <Route path= "/" element={<Search searchP={searchP} setSearchP={setSearchP}/>}></Route>
+      <Route path= "/search" element={<Search searchP={searchP} setSearchP={setSearchP}/>}></Route>
         <Route path= "my-photos" element={<MyPhotos />}></Route>
     </Route>
 

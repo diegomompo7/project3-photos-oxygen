@@ -2,13 +2,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {searchInput} from '../../App'
 
 let API_URL=""
-
+const random = Math.floor(Math.random(1) * 30)
 
 if(searchInput !== ""){
-  API_URL = `https://api.unsplash.com/search/photos/?query=${searchInput}&client_id=4PC_QDoXSrF2wFtTFAp6I7GlcARBFeSIfk-II145rrQ`
+  API_URL = `https://api.unsplash.com/search/photos/?query=${searchInput}&client_id=ULtwv1v7E2bGDmFPnXhKdkZBa_Yb46f2OFUAOyETGxM`
 }else{
-  const random = Math.floor(Math.random(1) * 30)
-  API_URL = `https://api.unsplash.com/photos/random/?count=${random}&client_id=4PC_QDoXSrF2wFtTFAp6I7GlcARBFeSIfk-II145rrQ`
+  API_URL = `https://api.unsplash.com/photos/random/?count=${random}&client_id=ULtwv1v7E2bGDmFPnXhKdkZBa_Yb46f2OFUAOyETGxM`
 }
 
 export const searchPhotos = createAsyncThunk(

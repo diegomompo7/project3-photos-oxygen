@@ -9,7 +9,11 @@ const SearchPhoto = (props) => {
     const navigate = useNavigate()
 
     const handleOnSubmit = (e) => {
-        navigate('/search')
+        if(props.input !== ""){
+            navigate('/search')
+        }else{
+            navigate('/')
+        }
     }
 
     const handleOnChange = (e) => {

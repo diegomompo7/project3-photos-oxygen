@@ -1,0 +1,35 @@
+.search{
+    display: flex;
+    flex-direction: column;
+    width: 84.1%;
+    max-width: 25em;
+    margin: 0 auto;
+
+}
+
+.btnSearch{
+    width: 2.292em;
+    height: 2.292em;
+    left: 40%;
+}
+.btnSearch-icon{
+    border-radius: 56px;
+    width: 55px;
+}
+
+@media (min-width: 400px) {
+    .search {
+        flex-direction: row;
+    }
+    .btnSearch{
+        left:34px;
+        top: 2.2em;
+
+    }
+    .searchPhoto{
+        width: 24.593em;
+        margin-top: 3.625em;
+    }
+}
+
+
