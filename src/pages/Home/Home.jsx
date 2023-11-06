@@ -1,11 +1,9 @@
 import React from "react";
 import SearchPhoto from "../../components/SearchPhoto/SearchPhoto";
 
-const Home = () => {
+const Home = (props) => {
     return (
-        <>
-            <SearchPhoto></SearchPhoto>
-        </>
+        <SearchPhoto input={props.searchP} setInput={props.setSearchP}></SearchPhoto>
     )
 }
 export default Home;

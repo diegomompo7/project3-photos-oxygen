@@ -1,22 +1,20 @@
-import React, { useState } from "react";
-import { Input, IconButton } from "@mui/material";
+import React from "react";
+import { Input, IconButton} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import './SearchPhoto.css'
+import { useNavigate } from "react-router";
 
-const SearchPhoto = () => {
+const SearchPhoto = (props) => {
 
-
-    const [input, setInput] = useState("")
+    const navigate = useNavigate()
 
     const handleOnSubmit = (e) => {
-        e.preventDefault()
-        console.log(input)
-        
+        navigate('/search')
     }
 
     const handleOnChange = (e) => {
         e.preventDefault()
-        setInput(e.target.value)
+        props.setInput(e.target.value)
     }
 
     return (
@@ -27,11 +25,17 @@ const SearchPhoto = () => {
                 fontSize: '1rem'
             }}/>
             <IconButton type="submit" className="btnSearch" sx={{
+                background: '#FFFFFF',
+                "&:hover" : {
                 background: '#FFFFFF'
+                }
+                
             }}>
                 <SearchIcon  sx={{
                   color: '#0F47AF',
-                  fontSize: '1.5rem'  
+                  fontSize: '1.5rem',
+                   background: '#FFFFFF',
+                   borderRadius: '56px'
                 }} className="btnSearch-icon">
                 </SearchIcon>
             </IconButton>

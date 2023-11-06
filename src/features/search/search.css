@@ -1,0 +1,72 @@
+.listItems{
+    width: 15.938em;
+    margin: 0 auto;
+    padding-top: 1.375em;
+}
+
+.itemPhoto{
+    background-color: white;
+    width: 14.563em;
+    margin: 0 auto;
+    padding-top: 0.75em;
+    margin-bottom: 0.938em;
+    border: 1px solid #0F47AF;
+    padding-bottom: 0.875em;
+}
+.photo-img{
+    width: 71%;
+    height: 6em;
+    margin-left: 12.8%;
+}
+.photo-title{
+    font-size: 1.25rem;
+    text-align: center;
+    font-family: 'Oxanium';
+    color: #0F47AF;
+}
+.btnOptions{
+    width: 2.292em;
+    height: 2.292em;
+}
+.btnOptions-icon{
+    border-radius: 56px;
+}
+
+
+@media (min-width: 900px) {
+    .listItems{
+        width: 76.8%;
+        flex-wrap: wrap;
+    }
+    .itemPhoto{
+        position: relative;
+        width: 18.81em;
+        height: auto;
+    }
+    .photo-img{
+       width: 55.4%;
+       margin-left: 8%;
+       padding-top: 0.75em;
+    }
+    .photo-title{
+        width: 57.4%;
+        margin-left: 10%;
+
+    }
+    .options{
+        display: grid;
+        grid-template-rows: auto ;
+        gap: 1.125em;
+        position: absolute;
+        left: 73%;
+        bottom: 33%;
+        
+    }
+    .btnOptions{
+        width: 2.292em;
+        height: 2.292em;
+    }
+    .btnOptions-icon{
+        border-radius: 56px;
+    }
+}
