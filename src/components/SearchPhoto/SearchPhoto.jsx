@@ -1,29 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, IconButton} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import './SearchPhoto.css'
-import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { searchPhotos } from "../../features/search/searchSlice";
 
 const SearchPhoto = (props) => {
 
-    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [inputSearch, setInputSearch] = useState("")
 
-    const handleOnSubmit = (e) => {
-        if(props.input !== ""){
-            navigate('/search')
-        }else{
-            navigate('/')
+        const handleOnSubmit = (e) => {
+            e.preventDefault()
+            console.log(inputSearch)
+            dispatch(searchPhotos(inputSearch))
         }
-    }
-
-    const handleOnChange = (e) => {
-        e.preventDefault()
-        props.setInput(e.target.value)
-    }
 
     return (
         <form className="search" onSubmit={(e) => handleOnSubmit(e)}>
-            <Input className="searchPhoto" placeholder="Search a photo..." onChange={(e) => handleOnChange(e)} sx={{
+            <Input className="searchPhoto" placeholder="Search a photo..." onChange={(e) => setInputSearch(e.target.value)} sx={{
             color: '#FFFFFF',
             fontFamily: 'Farro',
                 fontSize: '1rem'

@@ -1,21 +1,22 @@
-import React, { useEffect, useContext, useState } from "react";
+/* eslint-disable no-cond-assign */
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchPhotos, selectSearchPhotos, isLoading } from "./searchSlice";
-import { IconButton, Stack, Box, Alert, Collapse } from "@mui/material";
-import './search.css'
+import { searchPhotos, selectSearchPhotos, isLoading } from "../../features/search/searchSlice";
+import { IconButton, Stack, Box } from "@mui/material";
+import './Search.css'
 import SearchPhoto from "../../components/SearchPhoto/SearchPhoto";
-import { Favorite, Download, Close } from "@mui/icons-material";
+import { Favorite, Download } from "@mui/icons-material";
+import { addFav, favData} from "../../features/favorite/favoriteSlice";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-export let myFvaoritePhotos = []
 
-
-const Search = (props) => {
+const Search = () => {
     const dispatch = useDispatch()
+    const favPhotos = useSelector(favData);
     const search = useSelector(selectSearchPhotos)
     const isLoadingPhotos = useSelector(isLoading);
 
-    const [favorite, setFavorite] = useState([])
-    const [openAlert, setOpenAlert] = React.useState(false);
 
     useEffect(() => {
         dispatch(searchPhotos())
@@ -25,40 +26,35 @@ const Search = (props) => {
         return <div>loading photos</div>;
     }
 
-    const handleOnFavorite = (e, photo) => {
-        e.preventDefault()
-        console.log(photo)
-        setFavorite([...favorite, [photo.id, photo.alt_description, photo.width, photo.height, photo.likes, photo.created_at]])
-        setOpenAlert(true);
+    const handleOnFavorite = (photo) => {
+        const addPhoto = {
+            id: photo.id, 
+            description: 
+            photo.alt_description ? photo.alt_description
+            : "No description",
+            width: photo.width, 
+            height: photo.height, 
+            likes: photo.likes, 
+            date: photo.created_at, 
+            download:photo.urls.full
+        }
+        addPhoto.isFavorite = true
+        dispatch(addFav(addPhoto))
+        toast.success("Photo added succseful")
+        localStorage.setItem("favPhotos", JSON.stringify([...favPhotos, addPhoto]))
+
     }
 
-    console.log(favorite)
-    console.log(search)
+    console.log(favPhotos)
+
+
+    
+
 
     return (
         <>
-            <Collapse in={openAlert}>
-                <Alert
-                    action={
-                        <IconButton
-                            aria-label="close"
-                            color="inherit"
-                            size="small"
-                            onClick={() => {
-                                setOpenAlert(false);
-                            }}
-                        >
-                            <Close fontSize="inherit" />
-                        </IconButton>
-                    }
-                    sx={{ mb: 2 }}
-                >
-                    The photo has beed added successful
-                </Alert>
-            </Collapse>
-
-
-            <SearchPhoto input={props.searchP} setInput={props.setSearchP}></SearchPhoto>
+            <ToastContainer />
+            <SearchPhoto></SearchPhoto>
             <Stack className="listItems" direction={{ xs: 'column', md: 'row' }}>
 
                 {
@@ -84,7 +80,7 @@ const Search = (props) => {
                                         background: '#0F47AF',
                                         borderRadius: '56px',
 
-                                    }} className="btnOptions-icon" onClick={(e) => handleOnFavorite(e, photo)}></Favorite>
+                                    }} className="btnOptions-icon" onClick={() => handleOnFavorite(photo)}></Favorite>
                                 </IconButton>
                                 <IconButton sx={{
                                     background: '#0F47AF',
