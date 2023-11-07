@@ -8,10 +8,13 @@ import FavoriteItem from "../../components/FavoriteItem/FavoriteItem";
 import { useEffect, useState } from "react";
 // import Outlet
 
-const MyPhotos = (props) => {
+const MyPhotos = () => {
 
   const dispatch = useDispatch()
   const favPhotos = useSelector(favData);
+  const [lookQuery, setLookQuery] = useState("")
+
+
 
   const loadLocalStorage = () => {
     const localData = localStorage.getItem("favPhotos");
@@ -20,26 +23,29 @@ const MyPhotos = (props) => {
 
   useEffect(() => {
     const localFav = loadLocalStorage()
+    console.log(favPhotos)
     if(favPhotos.length === 0) {
       dispatch(addFav(localFav))
     }
-  })
+  }, [dispatch])
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault()
-  };
 
-  const handleOnChange = (e) => {
-    e.preventDefault();
-  };
+  useEffect(() => {
+    localStorage.setItem("favPhotos", JSON.stringify(favPhotos));
+  }, [favPhotos]);
+
+
+
+
 
   return (
     <>
-      <form className="search" onSubmit={(e) => handleOnSubmit(e)}>
+      <form className="search">
         <Textarea
           minRows={5}
           placeholder="Enter a description..."
-          onChange={(e) => handleOnChange(e)}
+          onChange={(e) => setLookQuery(e.target.value)}
+          value={lookQuery}
           sx={{
             marginTop: "1.25em",
             marginBottom: "2em",
@@ -52,7 +58,6 @@ const MyPhotos = (props) => {
           }}
         ></Textarea>
         <IconButton
-          type="submit"
           className="btnSearch"
           sx={{
             background: "#FFFFFF",
@@ -72,7 +77,14 @@ const MyPhotos = (props) => {
           ></SearchIcon>
         </IconButton>
       </form>
-      <FavoriteItem favorite={favPhotos} />
+
+      {
+        favPhotos.length > 0 ? (
+          <FavoriteItem favorite={favPhotos} lookQuery={lookQuery}/>
+        ) : (
+          <p>There aren't favorite photos</p>
+        )
+      }
     </>
   );
 };
