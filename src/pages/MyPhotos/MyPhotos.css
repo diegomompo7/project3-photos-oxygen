@@ -16,6 +16,13 @@
     border-radius: 56px;
     width: 55px;
 }
+.btnOptions{
+    width: 2.292em;
+    height: 2.292em;
+}
+.btnOptions-icon{
+    border-radius: 56px;
+}
 
 @media (min-width: 400px) {
     .search {

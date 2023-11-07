@@ -1,5 +1,5 @@
 .listFavorite{
-    width: 15.938em;
+    width: 20.75em;
     margin: 0 auto;
     padding-top: 1.375em;
 }
@@ -43,6 +43,17 @@
     position: relative;
     bottom: 65px;
 }
+.optionsFavorite{
+    display: flex;
+    justify-content: space-around;
+}
+.btnOptionsFav{
+    width: 2.063em;
+    height: 2.063em;
+}
+.btnOptions-icon{
+    border-radius: 56px;
+}
 
 
 @media (min-width: 900px) {
@@ -78,6 +89,22 @@
     .box-desc-two{
         position: relative;
         bottom: 175px;
+    }
+    .optionsFavorite{
+        display: grid;
+        grid-template-rows: auto ;
+        position: absolute;
+        left: 90%;
+        bottom: 4%;
+        gap: 1.188em
+        
+    }
+    .btnOptionsFav{
+        width: 2.063em;
+        height: 2.063em;
+    }
+    .btnOptions-icon{
+        border-radius: 56px;
     }
     
 }

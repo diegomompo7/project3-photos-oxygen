@@ -1,5 +1,6 @@
 import React from "react"
-import { Stack, Box } from "@mui/material"
+import { Stack, Box, IconButton } from "@mui/material"
+import { Download, Delete, Edit } from "@mui/icons-material"
 import './FavoriteItem.css'
 
 const FavoriteItem = (props) => {
@@ -26,7 +27,63 @@ const FavoriteItem = (props) => {
                       <p className="photo-description">Likes: {photo.likes}</p>
                       <p className="photo-description">Date added: {photo.date}</p>
                     </Box>
+                    <Box className="optionsFavorite">
+                                <IconButton sx={{
+                                    background: '#0F47AF',
+                                    
+                                    
+
+                                    "&:hover": {
+                                        background: '#0F47AF',
+                  
+                                        
+                                    }
+                                }} className="btnOptionsFav">
+                                    <Delete sx={{
+                                        color: '#FFFFFF',
+                                        fontSize: '1.5rem',
+                                        background: '#0F47AF',
+                                        borderRadius: '56px',
+
+                                    }} className="btnOptions-icon"></Delete>
+                                </IconButton>
+                                <IconButton sx={{
+                                    background: '#0F47AF',
+                                    
+                                    "&:hover": {
+                                        background: '#0F47AF',
+                                       
+                                    }
+                                }} className="btnOptionsFav">
+                                    <a target="_blank" download><Download sx={{
+                                        color: '#FFFFFF',
+                                        fontSize: '1.5rem',
+                                        background: '#0F47AF',
+                                        borderRadius: '56px'
+                                    }} className="btnOptions-icon">
+                                        </Download></a>
+                                </IconButton>
+                                <IconButton sx={{
+                                    background: '#0F47AF',
+                                    
+                                    "&:hover": {
+                                        background: '#0F47AF',
+                                       
+                                    }
+                                }} className="btnOptionsFav">
+                                    <Edit sx={{
+                                        color: '#FFFFFF',
+                                        fontSize: '1.5rem',
+                                        background: '#0F47AF',
+                                        borderRadius: '56px'
+                                    }} className="btnOptions-icon">
+                                        </Edit>
+                                </IconButton>
+                            </Box>
                   </item>
+
+                  
+                
               ))
             }
             </Stack>
