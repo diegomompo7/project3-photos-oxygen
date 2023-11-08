@@ -48,7 +48,10 @@ const Search = () => {
 
         addPhoto.isFavorite = true
         dispatch(addFav(addPhoto))
-        toast.success("Photo added succseful")
+        toast.success("Photo added succseful", {
+            position: toast.POSITION.BOTTOM_CENTER,
+            theme: "colored"
+        })
         localStorage.setItem("favPhotos", JSON.stringify([...favPhotos, addPhoto]))
 
         }

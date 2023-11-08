@@ -1,0 +1,20 @@
+.modal{
+    display: fixed;
+    justify-content: center;
+    background-color: #0F47AF;
+    width: 70%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 50vh;
+    padding-top: 20px;
+    min-width: 320px;
+}
+.btnUpgrade{
+    width: 2.292em;
+    height: 2.292em;
+    left: 45%;
+}
+.btnUpgrade-icon{
+    border-radius: 56px;
+    width: 1.719em
+}

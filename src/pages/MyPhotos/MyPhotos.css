@@ -4,6 +4,7 @@
     width: 84.1%;
     max-width: 25em;
     margin: 0 auto;
+    min-width: 320px;
 
 }
 
@@ -14,7 +15,7 @@
 }
 .btnSearch-icon{
     border-radius: 56px;
-    width: 55px;
+    width: 2.292em;
 }
 .btnOptions{
     width: 2.292em;

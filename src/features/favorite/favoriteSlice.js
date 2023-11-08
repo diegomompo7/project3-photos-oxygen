@@ -9,12 +9,15 @@ const favSlice = createSlice({
         },
         removeFav: (state, action) => {
             return state.filter(fav => fav.id !== action.payload)
+        },
+        updateFav: (state, action) => {
+            return state.description = action.payload
         }
-        
+
     }
 })
 
-export const {addFav, removeFav} = favSlice.actions
+export const {addFav, removeFav, updateFav} = favSlice.actions
 export const favData = (state) => state.favorite
 
 export default favSlice.reducer;

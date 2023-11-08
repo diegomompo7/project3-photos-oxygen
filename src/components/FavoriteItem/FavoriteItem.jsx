@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import { Stack, Box, IconButton } from "@mui/material";
 import { Download, Delete, Edit } from "@mui/icons-material";
 import { removeFav } from "../../features/favorite/favoriteSlice";
@@ -6,19 +6,27 @@ import { toast } from "react-toastify";
 import "./FavoriteItem.css";
 import downloadImage from "../Download/Download";
 import { useDispatch } from "react-redux";
+import ModalUpdate from "../ModalUpdate/ModalUpdate";
 
 const FavoriteItem = (props) => {
   const favorite = props.favorite;
   const query = props.lookQuery;
 
   const dispatch = useDispatch()
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
 
   console.log(favorite);
   return (
     <div>
       <Stack className="listFavorite" direction={{ xs: "column", md: "row" }}>
-        {favorite.map((photo) => (
+        {
+          favorite.filter(photo =>
+            photo.description.toLowerCase().includes(query.toLowerCase())
+          )
+          .map((photo) => (
           <item className="favoritePhoto" key={photo.id}>
+            <ModalUpdate open={open} setOpen={setOpen} description={photo.description} id={photo.id}></ModalUpdate>
             <img className="photo-img-favorite" src={photo.download}></img>
             <h1 className="photo-title-favorite">{photo.description}</h1>
             <Box className="description">
@@ -56,7 +64,10 @@ const FavoriteItem = (props) => {
                   className="btnOptions-icon"
                   onClick={() => {
                     dispatch(removeFav(photo.id))
-                    toast.error('Photo deleted succesfull')
+                    toast.error('Photo deleted succesfull', {
+                      position: toast.POSITION.BOTTOM_CENTER,
+                      theme: "colored"
+                    })
                   }}
                 ></Delete>
               </IconButton>
@@ -98,7 +109,7 @@ const FavoriteItem = (props) => {
                     borderRadius: "56px",
                   }}
                   className="btnOptions-icon"
-                ></Edit>
+                  onClick={handleOpen}></Edit>
               </IconButton>
             </Box>
           </item>
