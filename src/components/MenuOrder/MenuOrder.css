@@ -1,0 +1,12 @@
+.order-container{
+    width: 320px;
+    margin: 0 auto;
+    padding-top: 2.438em;
+}
+.order-control{
+    background-color: #0F47AF;
+}
+.order-label {
+    color: #FFFFFF;
+}
+

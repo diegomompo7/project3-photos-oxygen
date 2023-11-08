@@ -19,8 +19,6 @@ const ModalUpdate = (props) =>{
 
    }
 
-   console.log(props.description)
-
   return (
     <div>
       <Modal open={props.open}>
