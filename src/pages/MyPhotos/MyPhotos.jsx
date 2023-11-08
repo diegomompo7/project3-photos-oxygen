@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./MyPhotos.css"
 import FavoriteItem from "../../components/FavoriteItem/FavoriteItem";
 import { useEffect, useState } from "react";
-// import Outlet
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyPhotos = () => {
 
@@ -29,14 +29,9 @@ const MyPhotos = () => {
     }
   }, [dispatch])
 
-
   useEffect(() => {
     localStorage.setItem("favPhotos", JSON.stringify(favPhotos));
   }, [favPhotos]);
-
-
-
-
 
   return (
     <>
@@ -82,7 +77,7 @@ const MyPhotos = () => {
         favPhotos.length > 0 ? (
           <FavoriteItem favorite={favPhotos} lookQuery={lookQuery}/>
         ) : (
-          <p>There aren't favorite photos</p>
+          <h1 className="not-favorite">There aren't favorite photos</h1>
         )
       }
     </>

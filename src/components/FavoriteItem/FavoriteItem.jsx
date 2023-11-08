@@ -1,11 +1,18 @@
 import React from "react";
 import { Stack, Box, IconButton } from "@mui/material";
 import { Download, Delete, Edit } from "@mui/icons-material";
+import { removeFav } from "../../features/favorite/favoriteSlice";
+import { toast } from "react-toastify";
 import "./FavoriteItem.css";
+import downloadImage from "../Download/Download";
+import { useDispatch } from "react-redux";
 
 const FavoriteItem = (props) => {
   const favorite = props.favorite;
   const query = props.lookQuery;
+
+  const dispatch = useDispatch()
+
   console.log(favorite);
   return (
     <div>
@@ -47,6 +54,10 @@ const FavoriteItem = (props) => {
                     borderRadius: "56px",
                   }}
                   className="btnOptions-icon"
+                  onClick={() => {
+                    dispatch(removeFav(photo.id))
+                    toast.error('Photo deleted succesfull')
+                  }}
                 ></Delete>
               </IconButton>
               <IconButton
@@ -59,7 +70,6 @@ const FavoriteItem = (props) => {
                 }}
                 className="btnOptionsFav"
               >
-                <a target="_blank" download>
                   <Download
                     sx={{
                       color: "#FFFFFF",
@@ -68,8 +78,7 @@ const FavoriteItem = (props) => {
                       borderRadius: "56px",
                     }}
                     className="btnOptions-icon"
-                  ></Download>
-                </a>
+                    onClick={() => downloadImage(photo.download, photo.description)}></Download>
               </IconButton>
               <IconButton
                 sx={{

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, Tabs, Tab} from "@mui/material";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './Header.css'
 
 export const Header = () => {
@@ -31,10 +31,15 @@ export const Header = () => {
             <Tabs centered value={selectTab} onChange={handleChange}
               sx={{
                 ".headerTab ": { color: "#FFFFFF54", width: "50%", paddingTop:"23px", fontSize: "1em", fontFamily: 'Oxanium'},
+                ".MuiTabs-indicator" : {background: "#FFFFFF"}
               }}
             >
-                <Tab className="headerTab" label="HOME" to='/' component={Link}></Tab>
-                <Tab className="headerTab" label="MY PHOTOS" to='/my-photos' component={Link}></Tab>
+                <Tab className="headerTab" label="HOME" to='/' component={NavLink} sx={{
+                  "&.Mui-selected " : {color: "#FFFFFF"}
+                }}></Tab>
+                <Tab className="headerTab" label="MY PHOTOS" to='/my-photos' component={NavLink} sx={{
+                  "&.Mui-selected " : {color: "#FFFFFF"}
+                }}></Tab>
             </Tabs>
         </Box> 
     )

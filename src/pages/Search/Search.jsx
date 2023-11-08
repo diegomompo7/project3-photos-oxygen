@@ -2,13 +2,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchPhotos, selectSearchPhotos, isLoading } from "../../features/search/searchSlice";
-import { IconButton, Stack, Box } from "@mui/material";
+import { IconButton, Stack, Box, Card } from "@mui/material";
 import './Search.css'
 import SearchPhoto from "../../components/SearchPhoto/SearchPhoto";
 import { Favorite, Download } from "@mui/icons-material";
 import { addFav, favData} from "../../features/favorite/favoriteSlice";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import downloadImage from "../../components/Download/Download";
 
 
 const Search = () => {
@@ -38,17 +39,22 @@ const Search = () => {
             date: photo.created_at, 
             download:photo.urls.full
         }
+
+        const isOnFavorite = favPhotos.some(photo => photo.id === addPhoto.id)
+
+        if (isOnFavorite) {
+            toast.warning("The photo has been added")
+        } else {
+
         addPhoto.isFavorite = true
         dispatch(addFav(addPhoto))
         toast.success("Photo added succseful")
         localStorage.setItem("favPhotos", JSON.stringify([...favPhotos, addPhoto]))
 
+        }
+
     }
 
-    console.log(favPhotos)
-
-
-    
 
 
     return (
@@ -59,7 +65,7 @@ const Search = () => {
 
                 {
                     search.map((photo) => (
-                        <item className="itemPhoto" key={photo.id}>
+                        <Card className="itemPhoto" key={photo.id}>
                             <img className="photo-img" src={photo.urls.full}></img>
                             <h1 className="photo-title">{photo.alt_description}</h1>
                             <Box className="options">
@@ -74,13 +80,9 @@ const Search = () => {
                                         left: '13%',
                                     }
                                 }} className="btnOptions">
-                                    <Favorite sx={{
-                                        color: '#FFFFFF',
-                                        fontSize: '1.5rem',
-                                        background: '#0F47AF',
-                                        borderRadius: '56px',
-
-                                    }} className="btnOptions-icon" onClick={() => handleOnFavorite(photo)}></Favorite>
+                                    <Favorite className={`btnOptions-icon ${
+                                        favPhotos.some((fav) => fav.id === photo.id) ? "favRed" : ""
+                                    }`} onClick={() => handleOnFavorite(photo)}></Favorite>
                                 </IconButton>
                                 <IconButton sx={{
                                     background: '#0F47AF',
@@ -90,17 +92,11 @@ const Search = () => {
                                         left: '13%'
                                     }
                                 }} className="btnOptions">
-                                    <a href={photo.urls.full} target="_blank" download><Download sx={{
-                                        color: '#FFFFFF',
-                                        fontSize: '1.5rem',
-                                        background: '#0F47AF',
-                                        borderRadius: '56px'
-                                    }} className="btnOptions-icon">
-                                        </Download></a>
+                                    <Download className="btnOptions-icon" onClick={() => downloadImage(photo.urls.full, photo.alt_description)}></Download>
                                 </IconButton>
                             </Box>
 
-                        </item>
+                        </Card>
                     ))
                 }
 

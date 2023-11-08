@@ -23,6 +23,10 @@
 .btnOptions-icon{
     border-radius: 56px;
 }
+.not-favorite{
+    text-align: center;
+    color: #0F47AF;
+}
 
 @media (min-width: 400px) {
     .search {

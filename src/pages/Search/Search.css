@@ -30,6 +30,13 @@
 }
 .btnOptions-icon{
     border-radius: 56px;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    background-color: #0F47AF;
+    border-radius: 56px;
+}
+.favRed{
+    color: red;
 }
 
 
