@@ -1,59 +1,84 @@
 import React, { useState }  from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import { IconButton } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, IconButton} from '@mui/material';
 import { Upgrade } from '@mui/icons-material';
-import { Textarea } from '@mui/joy';
 import './ModalUpdate.css'
+import { Textarea } from '@mui/joy';
 import { useDispatch } from 'react-redux';
 import { updateFav } from '../../features/favorite/favoriteSlice';
+import { toast } from 'react-toastify';
 
-const ModalUpdate = (props) =>{
+const ModalUpdate = ({open, setOpen, currDescription}) =>{
+
+   const{
+    title
+  } = currDescription
+
+   const [newValues, setNewValues] = useState({
+    title: title
+   })
 
    const dispatch = useDispatch()
-   const [value, setValue] = useState(props.description)
 
-
-   const handleOnUpgrade = () => {
-    dispatch(updateFav({id: props.id, newDesc: value}))
-
+   const handleOnChange = (e) => {
+    const {name, value} = e.target;
+    setNewValues((prevFav) => ({
+      ...prevFav,
+      [name]: value
+    }))
    }
+
+   const handleOnSave = () => {
+      dispatch(updateFav({id: currDescription.id, newValues: newValues}))
+      toast.success("Photo edited successful")
+      setOpen(false)
+   }
+
+   console.log(newValues)
+
 
   return (
     <div>
-      <Modal open={props.open}>
-        <Box className="modal">
-        <Textarea
-          minRows={5}
-          placeholder="Enter a description..."
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          sx={{
-            width: "50%",
-            background: "#FFFFFF",
-            color: "#0F47AF",
-            fontFamily: "Farro",
-            fontSize: "1rem",
-            margin: "0 auto"
-        }}
-        ></Textarea>
+      <Dialog open={open} className="dialog" sx={{
+
+      }}>
+        <DialogTitle className='dialog-title' sx={{fontFamily: 'Oxanium', fontWeight: 'bold', color:"#0F47AF"}}>Edit description of the photo</DialogTitle>
+        <DialogContent>
+          <Textarea
+            minRows={5}
+            placeholder="Enter a title..."
+            value={newValues.title}
+            onChange={(event) => handleOnChange(event)}
+            autoFocus
+            margin="dense"
+            type="text"
+            name="title"
+
+            sx={{
+              marginTop:"1em",
+              background:"#0F47AF",
+              color: "#FFFFFF",
+              fontFamily: "Farro",
+              fontSize: "1rem",
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
         <IconButton type="submit" className="btnUpgrade" sx={{
-                background: '#FFFFFF',
-                margin: "1.875em 0",
+                background: '#0F47AF',
                 "&:hover" : {
-                background: '#FFFFFF'
+                background: '#0F47AF'
                 }
             }}>
                 <Upgrade  sx={{
-                  color: '#0F47AF',
+                  color: '#FFFFFF',
                   fontSize: '2rem',
-                   background: '#FFFFFF',
+                   background: '#0F47AF',
                    borderRadius: '56px'
-                }} className="btnUpgrade-icon" onClick={() => handleOnUpgrade()}>
+                }} className="btnUpgrade-icon" onClick={() => handleOnSave()}>
                 </Upgrade>
             </IconButton>
-        </Box>
-      </Modal>
+            </DialogActions>
+        </Dialog>
     </div>
   );
 

@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Stack, Box, IconButton } from "@mui/material";
 import { Download, Delete, Edit } from "@mui/icons-material";
 import { removeFav } from "../../features/favorite/favoriteSlice";
@@ -12,75 +12,92 @@ const FavoriteItem = (props) => {
   const favorite = props.favorite;
   const query = props.lookQuery;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const [currDescription, setCurrDescription] = useState({});
 
-  console.log(favorite);
+  console.log(currDescription, " despues de open")
+
+  const handleOpen = (photoEdit) => {
+    console.log(photoEdit)
+    setCurrDescription({
+      id: photoEdit.id,
+      title: photoEdit.description,
+      width: photoEdit.width,
+      height: photoEdit.height,
+      likes: photoEdit.likes,
+      date: photoEdit.date.slice(0, 10),
+    });
+  };
+
+  console.log(open);
   return (
     <div>
       <Stack className="listFavorite" direction={{ xs: "column", md: "row" }}>
-        {
-          favorite.filter(photo =>
+        {favorite
+          .filter((photo) =>
             photo.description.toLowerCase().includes(query.toLowerCase())
           )
           .map((photo) => (
-          <item className="favoritePhoto" key={photo.id}>
-            <ModalUpdate open={open} setOpen={setOpen} description={photo.description} id={photo.id}></ModalUpdate>
-            <img className="photo-img-favorite" src={photo.download}></img>
-            <h1 className="photo-title-favorite">{photo.description}</h1>
-            <Box className="description">
-              <Box className="box-desc-one">
-                <p className="photo-description width">Width: {photo.width}</p>
-                <p className="photo-description likes">Likes: {photo.likes}</p>
+            <item className="favoritePhoto" key={photo.id}>
+              <img className="photo-img-favorite" src={photo.download}></img>
+              <h1 className="photo-title-favorite">{photo.description}</h1>
+              <Box className="description">
+                <Box className="box-desc-one">
+                  <p className="photo-description width">
+                    Width: {photo.width}
+                  </p>
+                  <p className="photo-description likes">
+                    Likes: {photo.likes}
+                  </p>
+                </Box>
+                <Box className="box-desc-two">
+                  <p className="photo-description height">
+                    Height: {photo.height}
+                  </p>
+                  <p className="photo-description date">
+                    Date added: {photo.date}
+                  </p>
+                </Box>
               </Box>
-              <Box className="box-desc-two">
-                <p className="photo-description height">
-                  Height: {photo.height}
-                </p>
-                <p className="photo-description date">
-                  Date added: {photo.date}
-                </p>
-              </Box>
-            </Box>
-            <Box className="optionsFavorite">
-              <IconButton
-                sx={{
-                  background: "#0F47AF",
-
-                  "&:hover": {
-                    background: "#0F47AF",
-                  },
-                }}
-                className="btnOptionsFav"
-              >
-                <Delete
+              <Box className="optionsFavorite">
+                <IconButton
                   sx={{
-                    color: "#FFFFFF",
-                    fontSize: "1.5rem",
                     background: "#0F47AF",
-                    borderRadius: "56px",
-                  }}
-                  className="btnOptions-icon"
-                  onClick={() => {
-                    dispatch(removeFav(photo.id))
-                    toast.error('Photo deleted succesfull', {
-                      position: toast.POSITION.BOTTOM_CENTER,
-                      theme: "colored"
-                    })
-                  }}
-                ></Delete>
-              </IconButton>
-              <IconButton
-                sx={{
-                  background: "#0F47AF",
 
-                  "&:hover": {
+                    "&:hover": {
+                      background: "#0F47AF",
+                    },
+                  }}
+                  className="btnOptionsFav"
+                >
+                  <Delete
+                    sx={{
+                      color: "#FFFFFF",
+                      fontSize: "1.5rem",
+                      background: "#0F47AF",
+                      borderRadius: "56px",
+                    }}
+                    className="btnOptions-icon"
+                    onClick={() => {
+                      dispatch(removeFav(photo.id));
+                      toast.error("Photo deleted succesfull", {
+                        position: toast.POSITION.BOTTOM_CENTER,
+                        theme: "colored",
+                      });
+                    }}
+                  ></Delete>
+                </IconButton>
+                <IconButton
+                  sx={{
                     background: "#0F47AF",
-                  },
-                }}
-                className="btnOptionsFav"
-              >
+
+                    "&:hover": {
+                      background: "#0F47AF",
+                    },
+                  }}
+                  className="btnOptionsFav"
+                >
                   <Download
                     sx={{
                       color: "#FFFFFF",
@@ -89,32 +106,46 @@ const FavoriteItem = (props) => {
                       borderRadius: "56px",
                     }}
                     className="btnOptions-icon"
-                    onClick={() => downloadImage(photo.download, photo.description)}></Download>
-              </IconButton>
-              <IconButton
-                sx={{
-                  background: "#0F47AF",
-
-                  "&:hover": {
-                    background: "#0F47AF",
-                  },
-                }}
-                className="btnOptionsFav"
-              >
-                <Edit
+                    onClick={() =>
+                      downloadImage(photo.download, photo.description)
+                    }
+                  ></Download>
+                </IconButton>
+                <IconButton
                   sx={{
-                    color: "#FFFFFF",
-                    fontSize: "1.5rem",
                     background: "#0F47AF",
-                    borderRadius: "56px",
+
+                    "&:hover": {
+                      background: "#0F47AF",
+                    },
                   }}
-                  className="btnOptions-icon"
-                  onClick={handleOpen}></Edit>
-              </IconButton>
-            </Box>
-          </item>
-        ))}
+                  className="btnOptionsFav"
+                >
+                  <Edit
+                    sx={{
+                      color: "#FFFFFF",
+                      fontSize: "1.5rem",
+                      background: "#0F47AF",
+                      borderRadius: "56px",
+                    }}
+                    className="btnOptions-icon"
+                    onClick={() => {
+                      handleOpen(photo);
+                      setOpen(true);
+                    }}
+                  ></Edit>
+                </IconButton>
+              </Box>
+            </item>
+          ))}
       </Stack>
+      {open === true && (
+        <ModalUpdate
+          open={open}
+          setOpen={setOpen}
+          currDescription={currDescription}
+        ></ModalUpdate>
+      )}
     </div>
   );
 };
