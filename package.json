@@ -1,5 +1,5 @@
 {
-  "homepage": "http://project3-photos-oxygen.s3-website.eu-north-1.amazonaws.com/",
+  "homepage": "http://project3-photos-oxygen.s3-website.eu-north-1.amazonaws.com/relativepath",
   "name": "project3-photos-oxygen",
   "version": "0.1.0",
   "private": true,
