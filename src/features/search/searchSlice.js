@@ -9,7 +9,7 @@ export const searchPhotos = createAsyncThunk(
     if (searchInput !== "") {
       API_URL = `https://api.unsplash.com/search/photos/?query=${searchInput}&client_id=${process.env.REACT_APP_SECRET_KEY}`
     } else {
-      API_URL = `https://api.unsplash.com/photos/random/?count=10&client_id=${process.env.REACT_APP_SECRET_KEY}`
+      API_URL = `https://api.unsplash.com/photos/random/?count=30&client_id=${process.env.REACT_APP_SECRET_KEY}`
     }
 
     try{
@@ -52,6 +52,12 @@ const search = createSlice({
       })
   }
 });
+
+const pagePhotos = (state) => 
+  console.log(state)
+
+
+pagePhotos()
 
 export const selectSearchPhotos = (state) => state.search.photos;
 

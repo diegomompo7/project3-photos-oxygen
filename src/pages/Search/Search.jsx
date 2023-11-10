@@ -10,7 +10,7 @@ import { addFav, favData} from "../../features/favorite/favoriteSlice";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import downloadImage from "../../components/Download/Download";
-
+import NumberPages from "../../components/Pagination/Pagination";
 
 const Search = () => {
     const dispatch = useDispatch()
@@ -104,6 +104,7 @@ const Search = () => {
                 }
 
             </Stack>
+            <NumberPages page={search}></NumberPages>
         </>
     )
 
