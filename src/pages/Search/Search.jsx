@@ -6,7 +6,7 @@ import { IconButton, Stack, Box, Card } from "@mui/material";
 import './Search.css'
 import SearchPhoto from "../../components/SearchPhoto/SearchPhoto";
 import { Favorite, Download } from "@mui/icons-material";
-import { addFav, favData} from "../../features/favorite/favoriteSlice";
+import { addFav, favData, removeFav} from "../../features/favorite/favoriteSlice";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import downloadImage from "../../components/Download/Download";
@@ -43,7 +43,11 @@ const Search = () => {
         const isOnFavorite = favPhotos.some(photo => photo.id === addPhoto.id)
 
         if (isOnFavorite) {
-            toast.warning("The photo has been added")
+            dispatch(removeFav(photo.id))
+            toast.error("Photo deleted succesfull", {
+                position: toast.POSITION.BOTTOM_CENTER,
+                theme: "colored",
+              });
         } else {
 
         addPhoto.isFavorite = true
@@ -82,10 +86,10 @@ const Search = () => {
                                         marginRight: '44px',
                                         left: '13%',
                                     }
-                                }} className="btnOptions">
+                                }} className="btnOptions" onClick={() => handleOnFavorite(photo)}>
                                     <Favorite className={`btnOptions-icon ${
                                         favPhotos.some((fav) => fav.id === photo.id) ? "favRed" : ""
-                                    }`} onClick={() => handleOnFavorite(photo)}></Favorite>
+                                    }`}></Favorite>
                                 </IconButton>
                                 <IconButton sx={{
                                     background: '#0F47AF',
