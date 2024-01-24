@@ -52,7 +52,6 @@ const Search = () => {
                 position: toast.POSITION.BOTTOM_CENTER,
                 theme: "colored",
               });
-              console.log(favPhotos)
         } else {
 
         addPhoto.isFavorite = true
@@ -61,7 +60,6 @@ const Search = () => {
             position: toast.POSITION.BOTTOM_CENTER,
             theme: "colored"
         })
-        console.log(favPhotos)
         localStorage.setItem("favPhotos", JSON.stringify([...favPhotos, addPhoto]))
         }
 
