@@ -23,6 +23,10 @@ const Search = () => {
         dispatch(searchPhotos())
     }, [dispatch])
 
+    useEffect(() => {
+        localStorage.setItem("favPhotos", JSON.stringify(favPhotos));
+      }, [favPhotos]);
+
     if (isLoadingPhotos) {
         return <div>loading photos</div>;
     }
@@ -43,21 +47,22 @@ const Search = () => {
         const isOnFavorite = favPhotos.some(photo => photo.id === addPhoto.id)
 
         if (isOnFavorite) {
-            dispatch(removeFav(photo.id))
+            dispatch(removeFav(addPhoto.id))
             toast.error("Photo deleted succesfull", {
                 position: toast.POSITION.BOTTOM_CENTER,
                 theme: "colored",
               });
+              console.log(favPhotos)
         } else {
 
         addPhoto.isFavorite = true
         dispatch(addFav(addPhoto))
-        toast.success("Photo added succseful", {
+        toast.success("Photo added succesfull", {
             position: toast.POSITION.BOTTOM_CENTER,
             theme: "colored"
         })
+        console.log(favPhotos)
         localStorage.setItem("favPhotos", JSON.stringify([...favPhotos, addPhoto]))
-
         }
 
     }
