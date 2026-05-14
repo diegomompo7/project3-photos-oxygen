@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Stack, Box, IconButton } from "@mui/material";
 import { Download, Delete, Edit } from "@mui/icons-material";
 import { removeFav } from "../../features/favorite/favoriteSlice";

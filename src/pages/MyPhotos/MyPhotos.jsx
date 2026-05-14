@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, favData, sortFav } from "../../features/favorite/favoriteSlice";
-import { Box } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
-import SearchIcon from "@mui/icons-material/Search";
 import "./MyPhotos.css";
 import FavoriteItem from "../../components/FavoriteItem/FavoriteItem";
 import { useEffect, useState } from "react";
