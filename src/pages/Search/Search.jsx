@@ -76,7 +76,7 @@ const Search = () => {
                 {
                     search.map((photo) => (
                         <Card className="itemPhoto" key={photo.id}>
-                            <img className="photo-img" src={photo.urls.full}></img>
+                            <img className="photo-img" src={photo.urls.full} alt={photo.alt_description || "Photo"}></img>
                             <h1 className="photo-title">{photo.alt_description}</h1>
                             <Box className="options">
                                 <IconButton sx={{

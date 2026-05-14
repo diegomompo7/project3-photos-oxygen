@@ -39,8 +39,8 @@ const FavoriteItem = (props) => {
             photo.description.toLowerCase().includes(query.toLowerCase())
           )
           .map((photo) => (
-            <item className="favoritePhoto" key={photo.id}>
-              <img className="photo-img-favorite" src={photo.download}></img>
+            <item className="favoritePhoto" key={photo.id} >
+              <img className="photo-img-favorite" src={photo.download} alt={photo.alt_description || "Photo"}></img>
               <h1 className="photo-title-favorite">{photo.description}</h1>
               <Box className="description">
                 <Box className="box-desc-one">
